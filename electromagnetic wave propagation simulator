@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def simulate_wave(wavelength, frequency, medium_length, medium_speed):
+    time = np.linspace(0, medium_length / medium_speed, num=1000)
+    position = np.linspace(0, medium_length, num=1000)
+    wave_number = 2 * np.pi / wavelength
+    omega = 2 * np.pi * frequency
+    phase = wave_number * position - omega * time
+    amplitude = np.cos(phase)
+
+    return time, position, amplitude
+
+# Parâmetros de entrada
+wavelength = 1.0  # Comprimento de onda em metros
+frequency = 1.0e9  # Frequência em Hz
+medium_length = 10.0  # Comprimento do meio em metros
+medium_speed = 3.0e8  # Velocidade da luz no meio em m/s
+
+# Simulação da propagação da onda
+time, position, amplitude = simulate_wave(wavelength, frequency, medium_length, medium_speed)
+
+# Plotagem dos resultados
+plt.figure(figsize=(10, 5))
+plt.plot(position, amplitude)
+plt.xlabel('Posição (m)')
+plt.ylabel('Amplitude')
+plt.title('Propagação de onda eletromagnética')
+plt.grid(True)
+plt.show()
